@@ -1,7 +1,28 @@
 package com.database_testing;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Main {
+    private Connection conn;
+
+    public void get_Connection (){
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/test?" +
+                    "user=root&password=");
+            System.out.println("Successful Connection!");
+        }
+        catch (SQLException sqle){
+            // handle any errors
+            System.out.println("SQLException: " + sqle.getMessage());
+            System.out.println("SQLState: " + sqle.getSQLState());
+            System.out.println("VendorError: " + sqle.getErrorCode());
+        }
+    }
+
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        Main m = new Main();
+        m.get_Connection();
     }
 }
